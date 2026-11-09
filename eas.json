@@ -1,0 +1,13 @@
+{
+  "cli": {
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "clean-v110-apk": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      }
+    }
+  }
+}

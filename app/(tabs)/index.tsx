@@ -77,6 +77,16 @@ export default function HomeScreen() {
           Создайте BIP-39 фразу на устройстве. Приложение не делает сетевых запросов и не сохраняет секреты.
         </Text>
 
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel="Сгенерировать seed-фразу"
+          onPress={onGenerate}
+          disabled={isGenerating}
+          style={({ pressed }) => [styles.primaryGenerateButton, pressed && styles.pressed, isGenerating && styles.disabled]}
+        >
+          {isGenerating ? <ActivityIndicator color={COLORS.background} /> : <Text style={styles.primaryGenerateText}>СГЕНЕРИРОВАТЬ SEED-ФРАЗУ</Text>}
+        </Pressable>
+
         <View style={styles.card}>
           <Text style={styles.cardLabel}>ДЛИНА ФРАЗЫ</Text>
           <View style={styles.choiceRow}>
@@ -96,14 +106,6 @@ export default function HomeScreen() {
               );
             })}
           </View>
-          <Pressable
-            accessibilityRole="button"
-            onPress={onGenerate}
-            disabled={isGenerating}
-            style={({ pressed }) => [styles.generateButton, pressed && styles.pressed, isGenerating && styles.disabled]}
-          >
-            {isGenerating ? <ActivityIndicator color={COLORS.background} /> : <Text style={styles.generateText}>Сгенерировать фразу</Text>}
-          </Pressable>
         </View>
 
         {error ? (
@@ -179,8 +181,8 @@ const styles = StyleSheet.create({
   choiceNumberSelected: { color: COLORS.amber },
   choiceCaption: { color: COLORS.muted, fontSize: 12, marginTop: 2 },
   choiceCaptionSelected: { color: COLORS.amber },
-  generateButton: { alignItems: "center", justifyContent: "center", minHeight: 52, backgroundColor: COLORS.amber, borderRadius: 14, paddingHorizontal: 16 },
-  generateText: { color: COLORS.background, fontSize: 16, fontWeight: "800" },
+  primaryGenerateButton: { alignItems: "center", justifyContent: "center", minHeight: 64, backgroundColor: COLORS.amber, borderColor: "#ffd985", borderWidth: 2, borderRadius: 16, paddingHorizontal: 16, shadowColor: "#000", shadowOpacity: 0.3, shadowRadius: 8, shadowOffset: { width: 0, height: 4 }, elevation: 4 },
+  primaryGenerateText: { color: COLORS.background, fontSize: 17, fontWeight: "900", letterSpacing: 0.4 },
   pressed: { opacity: 0.75 },
   disabled: { opacity: 0.55 },
   resultCard: { backgroundColor: COLORS.surface, borderColor: COLORS.amber, borderWidth: 1, borderRadius: 20, padding: 18, gap: 14 },
